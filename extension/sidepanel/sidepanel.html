@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>chatgpt-reoauth</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div>
+        <h1>chatgpt-reoauth</h1>
+        <p>sub2api OpenAI OAuth 401 刷新器</p>
+      </div>
+      <span id="runningBadge" class="badge">空闲</span>
+    </header>
+
+    <section class="panel">
+      <h2>sub2api</h2>
+      <label>地址<input id="sub2apiBaseUrl" placeholder="https://your-sub2api.example.com"></label>
+      <label>管理员邮箱<input id="sub2apiEmail" placeholder="admin@example.com"></label>
+      <label>管理员密码<input id="sub2apiPassword" type="password" placeholder="sub2api password"></label>
+      <label>代理名 / ID<input id="sub2apiProxy" placeholder="可空"></label>
+      <label>处理上限<input id="sub2apiMaxItems" type="number" min="1" max="100" value="20"></label>
+      <label>操作延迟<input id="operationDelayMs" type="number" min="0" max="10000" step="500" value="2000"></label>
+      <label class="checkline">启用延迟<input id="operationDelayEnabled" type="checkbox" checked></label>
+      <div class="actions">
+        <button id="saveConfig">保存配置</button>
+        <button id="scan401">扫描 401</button>
+        <button id="startRefresh" class="primary">开始刷新</button>
+        <button id="stopRefresh" class="danger">停止</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">
+        <h2>配置备份</h2>
+        <span class="badge compact-badge">JSON</span>
+      </div>
+      <p class="hint">导出 sub2api、邮箱池、待删清单和延迟设置；不导出日志、扫描结果和当前流程。</p>
+      <input id="settingsFile" type="file" accept="application/json,.json" hidden>
+      <div class="actions">
+        <button id="exportSettings" type="button">导出配置</button>
+        <button id="importSettings" type="button">导入配置</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">
+        <h2>当前账号刷新流程</h2>
+        <span id="flowCounter" class="badge compact-badge">0 / 9</span>
+      </div>
+      <div id="flowAccount" class="flow-account">等待开始</div>
+      <div id="flowSteps" class="flow-steps"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">
+        <h2>托管邮箱池</h2>
+        <button id="toggleMailboxList" class="ghost" type="button">展开列表</button>
+      </div>
+      <textarea id="mailboxImport" rows="6" placeholder="邮箱----客户端ID----刷新令牌&#10;main@outlook.com----client-id----refresh-token"></textarea>
+      <div class="actions">
+        <button id="importMailboxes">导入邮箱</button>
+      </div>
+      <div id="mailboxList" class="list scrollable"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">
+        <h2>待确认删除</h2>
+        <span id="pendingDeleteCounter" class="badge compact-badge">0</span>
+      </div>
+      <div id="pendingDeleteList" class="list compact"></div>
+      <div class="actions">
+        <button id="deletePendingDeactivated" class="danger" type="button">确认删除远端旧账号</button>
+        <button id="clearPendingDeactivated" type="button">清空清单</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">
+        <h2>401 账号</h2>
+        <button id="toggleCandidateList" class="ghost" type="button">展开列表</button>
+      </div>
+      <div id="candidateList" class="list scrollable"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">
+        <h2>结果</h2>
+        <button id="toggleResultList" class="ghost" type="button">展开列表</button>
+      </div>
+      <div id="resultList" class="list scrollable compact"></div>
+    </section>
+
+    <section class="panel logs">
+      <h2>日志</h2>
+      <div id="logList"></div>
+    </section>
+  </main>
+  <div id="toastContainer" class="toast-container"></div>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

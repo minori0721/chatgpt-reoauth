@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "chatgpt-reoauth",
+  "version": "0.1.0",
+  "description": "Re-authorize sub2api OpenAI OAuth accounts through Chrome.",
+  "permissions": [
+    "sidePanel",
+    "tabs",
+    "webNavigation",
+    "declarativeNetRequest",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://auth.openai.com/*",
+        "https://auth0.openai.com/*",
+        "https://accounts.openai.com/*"
+      ],
+      "js": [
+        "content/auth.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "chatgpt-reoauth",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

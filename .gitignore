@@ -1,0 +1,6 @@
+dist/
+*.zip
+*.crx
+*.pem
+*.log
+
