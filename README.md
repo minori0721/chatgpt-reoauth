@@ -2,24 +2,20 @@
 
 纯 Chrome 扩展，用来给 sub2api 里的 OpenAI OAuth 账号做 401 重新授权刷新。
 
-它不需要 Node helper，也不依赖 `chatgpt-session-forge`。扩展后台直接调用 sub2api 管理接口，内容脚本接管 OpenAI OAuth 页面，邮箱验证码由扩展托管的 Outlook/Hotmail 账号池读取。
+扩展后台直接调用 sub2api 管理接口，内容脚本接管 OpenAI OAuth 页面，邮箱验证码由扩展托管的 Outlook/Hotmail 账号池读取。
 
 ## 安装
 
 1. 打开 [Releases](https://github.com/minori0721/chatgpt-reoauth/releases)
-2. 下载 `chatgpt-reoauth-v0.1.0.zip`
+2. 下载 `chatgpt-reoauth-vx.x.x.zip`
 3. 解压压缩包
 4. 打开 Chrome `chrome://extensions`
 5. 打开“开发者模式”
 6. 点击“加载已解压的扩展程序”
-7. 选择解压后的 `chatgpt-reoauth-v0.1.0` 文件夹
+7. 选择解压后的 `chatgpt-reoauth-vx.x.x` 文件夹
 8. 点击扩展图标打开侧边栏
 
-如果你是本地开发调试，也可以直接加载仓库里的扩展目录：
 
-```text
-D:\code-antigravity\chatgpt-reoauth\extension
-```
 
 ## 使用
 
